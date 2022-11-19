@@ -1,5 +1,5 @@
 
-// Для генерування випадкового кольору використовуй функцію getRandomHexColor.
+// Для генерування випадкового кольору використовуємо функцію getRandomHexColor.
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
