@@ -3,10 +3,10 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 // Створюємо посилання на елементи
 
-const firstDelay = document.querySelector([name = "delay"]);
-const delayStep = document.querySelector([name = "step"]);
-const amountEl = document.querySelector([name = "amount"]);
-const btnEl = document.querySelector(`button`);
+const firstDelay = document.querySelector(`[name = "delay"]`);
+const delayStep = document.querySelector(`[name = "step"]`);
+const amountEl = document.querySelector(`[name = "amount"]`);
+const form = document.querySelector(`.form`);
 
 
 // HTML містить розмітку форми, в поля якої користувач буде вводити першу затримку в мілісекундах,
@@ -16,15 +16,16 @@ const btnEl = document.querySelector(`button`);
 // скільки ввели в поле amount.Під час кожного виклику передай їй номер промісу(position), що створюється, і затримку,
 // враховуючи першу затримку(delay), введену користувачем, і крок(step).
 
-btnEl.addEventListener(`submit`, onSubmit);
+// Назначаємо слухача на форму
+form.addEventListener(`submit`, onSubmit);
 
 function onSubmit(event) {
   event.preventDefault();
-  // прив'язуємо amount до інпуту
+  // прив'язуємо інпути до їх значень
   let delay = Number(firstDelay.value);
   let step = Number(delayStep.value);
   let amount = Number(amountEl.value);
-  // на кожній ітерації передаєм номер промісу, затримку і крок
+  // на кожній ітерації передаєм номер промісу, затримку
   for (let i = 1; i <= amount; i += 1) { 
     // викликаємо  проміс createPromise стільки разів скільки вказано в amount, передаємо індекс(номер) промісу і затримку
     createPromise(i, delay)
@@ -34,6 +35,7 @@ function onSubmit(event) {
     .catch(({ position, delay }) => {
        Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
     })
+    // до затримки додаємо крок
      delay += step;
   }
 }
@@ -54,6 +56,7 @@ function createPromise(position, delay) {
     // Вказуємо затримку
   }, delay);
   });
+  // повертаєм проміс
   return promise;
 }
 
