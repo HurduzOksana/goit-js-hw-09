@@ -6,9 +6,9 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const buttonEl = document.querySelector(`[data-start]`);
 const inputEl = document.querySelector(`#datetime-picker`);
 const daysTime = document.querySelector(`[data-days]`);
-const minutesTime = document.querySelector(`[data-hours]`);
-const secondsTime = document.querySelector(`[data-minutes]`);
-const hoursTime = document.querySelector(`[data-seconds]`);
+const minutesTime = document.querySelector(`[data-minutes]`);
+const secondsTime = document.querySelector(`[data-seconds]`);
+const hoursTime = document.querySelector(`[data-hours]`);
 
 const thisData = new Date();
 buttonEl.disabled = true;
@@ -36,12 +36,8 @@ const options = {
 const timer = {
     intervalId: null,
 
-    // isActive: false,
     start(deadline) {
-        // if (this.isActive) {
-        //     return;
-        // }
-        // this.isActive = true;
+        
         this.intervalId = setInterval(() => {
             const now = Date.now();
             const diff = deadline - now;
@@ -63,7 +59,7 @@ const timer = {
 
     stop() {
         clearInterval(this.intervalId);
-        // this.isActive = false;
+       
 
     },
 
@@ -88,7 +84,7 @@ const timer = {
 
 };
 
-// timer.start(divEl,DEADLINE_DATE);
+
 flatpickr(inputEl, options);
 
 buttonEl.addEventListener('click', () => {
